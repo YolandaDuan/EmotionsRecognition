@@ -18,7 +18,7 @@ Global Variables
 '''
 SIMPLE_EMBEDDING=False
 MANUAL_SPLIT    =True
-DATA_2D         =True
+DATA_2D         =False
 
 labels ={
     "ANGER": 0,
@@ -102,7 +102,7 @@ def plotData(X, labelsData):
     if(DATA_2D):
         # Convert labels from string into integer, then plot it in different colors
         labelsData = pd.Categorical(pd.factorize(labelsData)[0])
-        plt.scatter(X[:,0], X[:,1])
+        plt.scatter(X[:,0], X[:,1], c=labelsData, cmap=plt.cm.summer)
         plt.show()
     else:
         fig = plt.figure()
@@ -199,11 +199,11 @@ print(dataClass.features.shape)
 # Data Reduction 
 if(SIMPLE_EMBEDDING):
     #  Dimensionality Reduction PCA 
-    pca = PCA(n_components = 2)
+    pca = PCA(n_components = 3)
     X_trans = pca.fit_transform(dataClass.features)
 else:
     # Manifold embedding with tSNE/Users/Lingyan/Desktop/IIS2019/Assignment 1/emotions_recognition.py
-    tsne = manifold.TSNE(n_components=2, init='pca', random_state=0)
+    tsne = manifold.TSNE(n_components=3, init='pca', random_state=0)
     X_trans = tsne.fit_transform(dataClass.features)
 
 # Ploting Data

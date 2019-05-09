@@ -50,7 +50,7 @@ class classData:
 
 
 def knnClassifier(data,labels, nNeighbors):
-    knn = neighbors.KNeighborsClassifier(nNeighbors, weights='distance')
+    knn = neighbors.KNeighborsClassifier(nNeighbors, weights='uniform')
     knn.fit(data,labels)
     return knn
 
@@ -210,7 +210,7 @@ else:
 plotData(X_trans, dataClass.label)
 
 trainData, testData, trainLabels, expectedLabels = holdOut(dataClass, n_samples)
-knn = knnClassifier(trainData,trainLabels,6)
+knn = knnClassifier(trainData,trainLabels,50)
 svm = svmClassifier(trainData,trainLabels)
 print("\nReport for K-NN classifier\n")
 testClass(knn, dataClass,testData,expectedLabels)
